@@ -106,14 +106,17 @@
 <div class="relative overflow-hidden rounded-lg bg-navy p-8 shadow-card-lg">
 <div class="pointer-events-none absolute -bottom-16 -left-16 h-32 w-32 rotate-45 bg-sky/20"></div>
 <h2 class="font-display text-headline-md text-white mb-2 relative" id="quote-form">Request a Quote</h2>
-<p class="text-white/70 mb-6 relative">Fill out the details below and a service specialist will respond promptly.</p>
+<p class="text-white/70 mb-6 relative">The more details you share, the more accurate your quote will be. This takes about 2 minutes.</p>
 
-<form name="quote-request" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/thank-you.html" class="relative flex flex-col gap-5" id="quoteForm">
+<form name="quote-request" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/thank-you.html" class="relative flex flex-col gap-8" id="quoteForm">
 <input type="hidden" name="form-name" value="quote-request">
 <p class="hidden">
 <label>Don't fill this out if you're human: <input name="bot-field"></label>
 </p>
 
+<!-- Section: Contact Information -->
+<fieldset class="flex flex-col gap-5">
+<legend class="text-label text-gold mb-4">Contact Information</legend>
 <div>
 <label class="field-label !text-white/80" for="fullName">Full Name</label>
 <input class="field-input" id="fullName" name="fullName" placeholder="Jane Doe" type="text" autocomplete="name" required>
@@ -128,11 +131,79 @@
 <input class="field-input" id="phone" name="phone" placeholder="(555) 000-0000" type="tel" autocomplete="tel" required>
 </div>
 </div>
+<div>
+<span class="field-choice-label">Preferred Contact Method</span>
+<div class="flex flex-wrap gap-x-6 gap-y-2 mt-1">
+<label class="field-choice"><input class="field-radio" type="radio" name="preferredContact" value="Phone" checked> Phone</label>
+<label class="field-choice"><input class="field-radio" type="radio" name="preferredContact" value="Email"> Email</label>
+<label class="field-choice"><input class="field-radio" type="radio" name="preferredContact" value="Text"> Text</label>
+</div>
+</div>
+</fieldset>
+
+<!-- Section: Property Details -->
+<fieldset class="flex flex-col gap-5 pt-2 border-t border-white/10">
+<legend class="text-label text-gold mb-4">Property Details</legend>
+<div>
+<label class="field-label !text-white/80" for="address">Service Address <span class="field-optional">(optional)</span></label>
+<input class="field-input" id="address" name="address" placeholder="123 Main St, Salt Lake City, UT" type="text" autocomplete="street-address">
+</div>
 <div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
 <div>
 <label class="field-label !text-white/80" for="zipCode">Zip Code</label>
 <input class="field-input" id="zipCode" name="zipCode" placeholder="84101" type="text" inputmode="numeric" autocomplete="postal-code" required>
 </div>
+<div>
+<label class="field-label !text-white/80" for="propertyType">Property Type</label>
+<select class="field-input" id="propertyType" name="propertyType" required>
+<option value="" disabled selected>Select an option</option>
+<option value="house">House</option>
+<option value="apartment-condo">Apartment / Condo</option>
+<option value="office-commercial">Office / Commercial Space</option>
+<option value="post-construction-site">Post-Construction Site</option>
+<option value="other">Other</option>
+</select>
+</div>
+</div>
+<div class="grid grid-cols-1 gap-5 sm:grid-cols-3">
+<div>
+<label class="field-label !text-white/80" for="bedrooms">Bedrooms</label>
+<select class="field-input" id="bedrooms" name="bedrooms">
+<option value="" disabled selected>Select</option>
+<option value="studio">Studio</option>
+<option value="1">1</option>
+<option value="2">2</option>
+<option value="3">3</option>
+<option value="4">4</option>
+<option value="5+">5+</option>
+<option value="n/a">N/A</option>
+</select>
+</div>
+<div>
+<label class="field-label !text-white/80" for="bathrooms">Bathrooms</label>
+<select class="field-input" id="bathrooms" name="bathrooms">
+<option value="" disabled selected>Select</option>
+<option value="1">1</option>
+<option value="1.5">1.5</option>
+<option value="2">2</option>
+<option value="2.5">2.5</option>
+<option value="3">3</option>
+<option value="3.5">3.5</option>
+<option value="4+">4+</option>
+<option value="n/a">N/A</option>
+</select>
+</div>
+<div>
+<label class="field-label !text-white/80" for="squareFootage">Approx. Sq. Ft. <span class="field-optional">(optional)</span></label>
+<input class="field-input" id="squareFootage" name="squareFootage" placeholder="e.g. 1800" type="number" min="0" inputmode="numeric">
+</div>
+</div>
+</fieldset>
+
+<!-- Section: Service Details -->
+<fieldset class="flex flex-col gap-5 pt-2 border-t border-white/10">
+<legend class="text-label text-gold mb-4">Service Details</legend>
+<div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
 <div>
 <label class="field-label !text-white/80" for="serviceType">Service Type</label>
 <select class="field-input" id="serviceType" name="serviceType" required>
@@ -143,11 +214,90 @@
 <option value="specialized">Specialized Care (Pet/Senior)</option>
 </select>
 </div>
+<div>
+<label class="field-label !text-white/80" for="frequency">Frequency</label>
+<select class="field-input" id="frequency" name="frequency" required>
+<option value="" disabled selected>Select an option</option>
+<option value="one-time">One-Time Clean</option>
+<option value="weekly">Weekly</option>
+<option value="bi-weekly">Bi-Weekly</option>
+<option value="monthly">Monthly</option>
+<option value="move-in-out">Move-In / Move-Out</option>
+</select>
+</div>
 </div>
 <div>
-<label class="field-label !text-white/80" for="message">Message</label>
-<textarea class="field-input resize-none" id="message" name="message" placeholder="Tell us about your cleaning needs..." rows="4"></textarea>
+<label class="field-label !text-white/80" for="cleanlinessLevel">Current Condition of the Space</label>
+<select class="field-input" id="cleanlinessLevel" name="cleanlinessLevel" required>
+<option value="" disabled selected>Select an option</option>
+<option value="light">Light maintenance — generally tidy</option>
+<option value="standard">Standard — normal everyday use</option>
+<option value="deep">Deep clean needed — hasn't been cleaned in a while</option>
+<option value="heavy">Heavy-duty — very dirty, neglected, or post-renovation</option>
+</select>
 </div>
+<div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
+<div>
+<label class="field-label !text-white/80" for="preferredDate">Preferred Date <span class="field-optional">(optional)</span></label>
+<input class="field-input" id="preferredDate" name="preferredDate" type="date">
+</div>
+<div>
+<label class="field-label !text-white/80" for="preferredTime">Preferred Time</label>
+<select class="field-input" id="preferredTime" name="preferredTime">
+<option value="" disabled selected>Select an option</option>
+<option value="morning">Morning</option>
+<option value="afternoon">Afternoon</option>
+<option value="evening">Evening</option>
+<option value="flexible">Flexible</option>
+</select>
+</div>
+</div>
+<div>
+<span class="field-choice-label">Extra Services <span class="field-optional">(optional — select all that apply)</span></span>
+<div class="mt-2 grid grid-cols-1 gap-2 sm:grid-cols-2">
+<label class="field-choice"><input class="field-checkbox" type="checkbox" name="extraServices" value="Inside Oven"> Inside Oven</label>
+<label class="field-choice"><input class="field-checkbox" type="checkbox" name="extraServices" value="Inside Fridge"> Inside Fridge</label>
+<label class="field-choice"><input class="field-checkbox" type="checkbox" name="extraServices" value="Interior Windows"> Interior Windows</label>
+<label class="field-choice"><input class="field-checkbox" type="checkbox" name="extraServices" value="Laundry"> Laundry</label>
+<label class="field-choice"><input class="field-checkbox" type="checkbox" name="extraServices" value="Carpet Deep Clean"> Carpet Deep Clean</label>
+<label class="field-choice"><input class="field-checkbox" type="checkbox" name="extraServices" value="Wall Washing"> Wall Washing</label>
+<label class="field-choice"><input class="field-checkbox" type="checkbox" name="extraServices" value="Garage"> Garage</label>
+<label class="field-choice"><input class="field-checkbox" type="checkbox" name="extraServices" value="Basement"> Basement</label>
+</div>
+</div>
+<div>
+<span class="field-choice-label">Do you have pets at home?</span>
+<div class="flex flex-wrap gap-x-6 gap-y-2 mt-1">
+<label class="field-choice"><input class="field-radio" type="radio" name="hasPets" value="Yes"> Yes</label>
+<label class="field-choice"><input class="field-radio" type="radio" name="hasPets" value="No" checked> No</label>
+</div>
+</div>
+<div>
+<label class="field-label !text-white/80" for="petDetails">Pet Details <span class="field-optional">(optional — type, number, any notes)</span></label>
+<input class="field-input" id="petDetails" name="petDetails" placeholder="e.g. 1 dog, friendly, kept in the backyard" type="text">
+</div>
+</fieldset>
+
+<!-- Section: Additional Notes -->
+<fieldset class="flex flex-col gap-5 pt-2 border-t border-white/10">
+<legend class="text-label text-gold mb-4">Additional Notes</legend>
+<div>
+<label class="field-label !text-white/80" for="howHeard">How Did You Hear About Us? <span class="field-optional">(optional)</span></label>
+<select class="field-input" id="howHeard" name="howHeard">
+<option value="" disabled selected>Select an option</option>
+<option value="google-search">Google Search</option>
+<option value="social-media">Social Media</option>
+<option value="referral">Friend / Family Referral</option>
+<option value="repeat-customer">Repeat Customer</option>
+<option value="other">Other</option>
+</select>
+</div>
+<div>
+<label class="field-label !text-white/80" for="message">Message <span class="field-optional">(optional)</span></label>
+<textarea class="field-input resize-none" id="message" name="message" placeholder="Tell us about your cleaning needs, access instructions, or anything else we should know..." rows="4"></textarea>
+</div>
+</fieldset>
+
 <button class="btn-gold justify-center mt-2" type="submit">Submit Request</button>
 <p id="formStatus" class="text-sm text-white/80" role="status" aria-live="polite"></p>
 </form>
@@ -229,6 +379,10 @@ Do you service areas outside of Salt Lake City?
 </div>
 </div>
 </footer>
+<script src="assets/js/main.js"></script>
+</body>
+</html>
+
 <script src="assets/js/main.js"></script>
 </body>
 </html>
