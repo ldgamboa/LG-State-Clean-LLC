@@ -28,18 +28,31 @@
   // normal POST if JavaScript or the fetch call fails for any reason.
   var form = document.getElementById("quoteForm");
   if (form) {
+    // Language helpers (provided by i18n.js; harmless fallbacks if it is missing)
+    var LG = window.LG || {};
+    var tr = LG.t || function (s) { return s; };
+    var setText = LG.setText || function (el, s) { el.textContent = s; };
+
     var status = document.getElementById("formStatus");
 
     function handleSubmit(e) {
       e.preventDefault();
 
       var submitBtn = form.querySelector('button[type="submit"]');
-      var originalLabel = submitBtn ? submitBtn.textContent : "";
+      // Ignore repeated clicks/Enter while a submission is in progress
+      if (submitBtn && submitBtn.disabled) return;
+      // Remember the real label once, so it can always be restored
+      if (submitBtn && !submitBtn.dataset.label) {
+        submitBtn.dataset.label = submitBtn.getAttribute("data-en") || submitBtn.textContent;
+      }
+      var originalLabel = submitBtn ? submitBtn.dataset.label : "";
       if (submitBtn) {
         submitBtn.disabled = true;
-        submitBtn.textContent = "Sending…";
+        setText(submitBtn, "Sending…");
       }
       if (status) {
+        status.removeAttribute("data-i18n");
+        status.removeAttribute("data-en");
         status.textContent = "";
         status.className = "text-sm text-white/80";
       }
@@ -59,7 +72,7 @@
           if (!response.ok) throw new Error("Network response was not ok");
           form.reset();
           if (status) {
-            status.textContent = "Thank you! Your request has been sent — we'll be in touch shortly.";
+            setText(status, "Thank you! Your request has been sent — we'll be in touch shortly.");
             status.className = "text-sm text-gold font-semibold";
           }
         })
@@ -71,7 +84,7 @@
         .finally(function () {
           if (submitBtn) {
             submitBtn.disabled = false;
-            submitBtn.textContent = originalLabel;
+            setText(submitBtn, originalLabel);
           }
         });
     }

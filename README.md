@@ -17,6 +17,7 @@ netlify.toml              → Configuración de Netlify (cache headers)
 assets/
   css/style.css           → CSS compilado y minificado (Tailwind, sin dependencias externas)
   js/main.js               → Menú móvil + envío del formulario
+  js/i18n.js               → Selector de idioma inglés / español (con todas las traducciones)
   img/                      → Logo, íconos, favicons e imagen para redes sociales
 ```
 
@@ -79,3 +80,16 @@ Cuando tengas fotos reales de trabajos terminados, de tu equipo o del camión ro
 ## 🔧 Si necesitas volver a editar el sitio
 
 Las páginas HTML fueron generadas con un pequeño script (no incluido en esta carpeta de entrega, pero puedo compartírtelo si quieres seguir editando por código en vez de manualmente). Si prefieres editar directamente el HTML, cada página es independiente y puedes modificar el texto o los enlaces con cualquier editor de texto — solo ten cuidado de no romper las clases de Tailwind ya compiladas en `style.css` (si agregas una clase de Tailwind que no existía antes, no tendrá estilo hasta recompilar).
+
+
+---
+
+## 🌎 Idioma inglés / español
+
+El sitio está escrito en inglés y tiene un botón **EN | ES** en el encabezado. Al elegir español, el texto se traduce al instante y se recuerda la elección del visitante.
+
+- Todas las traducciones están en **`assets/js/i18n.js`**, en el objeto `ES`, con el formato `"Texto en inglés": "Texto en español"`.
+- **Para cambiar un texto en español:** busca la frase en inglés dentro de `i18n.js` y edita solo la parte en español.
+- **Si cambias un texto en inglés** en un HTML, actualiza también su clave en `i18n.js` (debe ser idéntica); si no, esa frase se verá en inglés en la versión en español.
+- **Para agregar texto nuevo:** ponle el atributo `data-i18n` al elemento en el HTML y agrega la pareja inglés/español en `i18n.js`. Para placeholders o `aria-label`, usa `data-i18n-attr="placeholder"`.
+- Lo que el cliente selecciona en el formulario siempre se envía en inglés, así que los mensajes que llegan a Netlify tienen los mismos valores en ambos idiomas.

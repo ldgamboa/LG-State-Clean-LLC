@@ -7,3 +7,14 @@
 .gap-x-6{column-gap:1.5rem}
 .gap-y-2{row-gap:.5rem}
 @media (min-width:640px){.sm\:grid-cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}}
+
+/* --- Utah map on contact page --- */
+.utah-map{height:22rem}
+
+/* --- Language toggle (EN | ES) --- */
+.lang-toggle{display:inline-flex;align-items:center;flex-shrink:0;border:1px solid rgba(0,27,61,.2);border-radius:.375rem;overflow:hidden;background:#fff}
+.lang-btn{padding:.35rem .55rem;font-size:.75rem;line-height:1;font-weight:700;letter-spacing:.05em;color:rgba(0,27,61,.7);background:transparent;border:0;cursor:pointer;transition:background-color .2s,color .2s}
+.lang-btn:hover{background:rgba(0,174,239,.1);color:#001b3d}
+.lang-btn[aria-pressed="true"]{background:#001b3d;color:#fff}
+.lang-btn:focus-visible{outline:2px solid #00aeef;outline-offset:-2px}
+@media (min-width:640px){.lang-btn{padding:.4rem .7rem}}
